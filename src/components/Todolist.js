@@ -6,7 +6,10 @@ function Todolist(props) {
       <button className="del_Bt" onClick={() => props.delTodo(props.todo.id)}>
         삭제하기
       </button>
-      <button className="com_Bt" onClick={() => props.comClick(props.todo.id)}>
+      <button
+        className="com_Bt"
+        onClick={() => props.updateClick(props.todo.id)}
+      >
         {props.todo.isDone ? "취소하기" : "완료하기"}
       </button>
     </div>

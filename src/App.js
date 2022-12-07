@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import Todolist from "./components/Todolist";
+import Header from "./components/header";
+import Inputbox from "./components/Inputbox";
 import "./App.css";
+import Listbox from "./components/Listbox";
 
 const App = () => {
   const [todolist, setTodoList] = useState([]);
@@ -27,7 +29,7 @@ const App = () => {
     const newTodoList = todolist.filter((todo) => todo.id !== id);
     setTodoList(newTodoList);
   };
-  const comClick = (id) => {
+  const updateClick = (id) => {
     const comTodo = todolist.map((todo) => {
       if (todo.id === id) {
         return {
@@ -43,62 +45,19 @@ const App = () => {
 
   return (
     <div className="base">
-      <header className="header">나의 Todolist</header>
-      <div className="input_box">
-        <input
-          className="input"
-          type="text"
-          placeholder="제목을 입력하세요"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-        />
-        <input
-          className="input"
-          type="text"
-          placeholder="내용을 입력하세요"
-          onChange={(e) => setList(e.target.value)}
-          value={list}
-        />
-        <button className="add_Bt" onClick={addTodo}>
-          추가하기
-        </button>
-      </div>
-      <div className="list_box">
-        <div className="working_box">
-          <p>Working</p>
-          {todolist.map((todo) => {
-            if (!todo.isDone) {
-              return (
-                <Todolist
-                  todo={todo}
-                  key={todo.id}
-                  delTodo={delTodo}
-                  comClick={comClick}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </div>
-        <div className="done_box">
-          <p>Done</p>
-          {todolist.map((todo) => {
-            if (todo.isDone) {
-              return (
-                <Todolist
-                  todo={todo}
-                  key={todo.id}
-                  delTodo={delTodo}
-                  comClick={comClick}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </div>
-      </div>
+      <Header>나의 Todolist</Header>
+      <Inputbox
+        setTitle={setTitle}
+        title={title}
+        setList={setList}
+        list={list}
+        addTodo={addTodo}
+      />
+      <Listbox
+        todolist={todolist}
+        delTodo={delTodo}
+        updateClick={updateClick}
+      />
     </div>
   );
 };
