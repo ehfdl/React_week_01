@@ -13,10 +13,15 @@ const App = () => {
       list: list,
       isDone: false,
     };
-    setTodoList([...todolist, newTodo]);
-    setList("");
-    setTitle("");
-    console.log(todolist);
+    if (newTodo.title === "") {
+      alert("제목을 입력해주세요!");
+    } else if (newTodo.list === "") {
+      alert("내용을 입력해주세요!");
+    } else {
+      setTodoList([...todolist, newTodo]);
+      setList("");
+      setTitle("");
+    }
   };
   const delTodo = (id) => {
     const newTodoList = todolist.filter((todo) => todo.id !== id);
